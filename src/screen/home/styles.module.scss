@@ -1,4 +1,12 @@
-.background {
-   // position: relative;
-   // min-height: 350px;
-  }
+.back {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mainTable {
+   width: 750px;
+   height: 800px;
+   background-color: #3D4148;
+}
