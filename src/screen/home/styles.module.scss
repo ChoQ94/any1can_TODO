@@ -18,4 +18,12 @@
     align-items: center;
     border-bottom: 3px solid #373A41;
    }
+
+   .date {
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+   }
 }

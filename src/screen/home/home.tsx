@@ -20,6 +20,14 @@ export default function Home() {
                             TODO LIST ANYONE CAN DO
                         </Typography>
                 </div>
+                <div className={styles.date}>
+                    <Typography fontSize={50} fontWeight={700}>
+                        Feb 6, 2023
+                    </Typography>
+                    <Typography fontSize={30} fontWeight={700}>
+                        Wed
+                    </Typography>
+                </div>
             </div>
         </div>
     )
