@@ -9,4 +9,13 @@
    width: 750px;
    height: 800px;
    background-color: #3D4148;
+   border-radius: 12px;
+
+   .title {
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 3px solid #373A41;
+   }
 }
