@@ -5,7 +5,7 @@ import back from "public/assets/image/background.png"
 import { Typography } from '@mui/material';
 import Input from '@mui/joy/Input';
 import Button from '@mui/joy/Button';
-// import Button as Qwe from '@mui/material';
+import { margin } from '@mui/system';
 
 export default function Home() {
     const [text, setText] = useState('');
@@ -45,6 +45,7 @@ export default function Home() {
                         endDecorator={<Button sx={{border: '1px solid white'}} variant='solid' color="primary" onClick={clear}>+</Button>}
                     ></Input>
                 </div>
+                <div className={styles.divider} />                   
             </div>
         </div>
     )

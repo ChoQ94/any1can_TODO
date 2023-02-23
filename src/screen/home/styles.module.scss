@@ -28,10 +28,14 @@
    }
 
    .input {
-    // display: flex;
-    // justify-content: center;
-    // align-items: center;
     width: 400px;
     margin: auto;
+    margin-bottom: 30px;
+   }
+
+   .divider {
+    width: 500px;
+    margin: auto;
+    border: 1.4px solid #373A41;
    }
 }
