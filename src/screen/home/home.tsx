@@ -5,7 +5,7 @@ import back from "public/assets/image/background.png"
 import { Typography } from '@mui/material';
 import Input from '@mui/joy/Input';
 import Button from '@mui/joy/Button';
-
+// import Button as Qwe from '@mui/material';
 
 export default function Home() {
     const [text, setText] = useState('');
@@ -42,7 +42,7 @@ export default function Home() {
                         onChange={(e)=>setText(e.target.value)}
                         placeholder='오늘 나는..'
                         variant="outlined"
-                        endDecorator={<Button variant='solid' color="primary" onClick={clear}>+</Button>}
+                        endDecorator={<Button sx={{border: '1px solid white'}} variant='solid' color="primary" onClick={clear}>+</Button>}
                     ></Input>
                 </div>
             </div>
