@@ -1,11 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Image from "next/image";
 import styles from "src/screen/home/styles.module.scss"
 import back from "public/assets/image/background.png"
 import { Typography } from '@mui/material';
+import Input from '@mui/joy/Input';
+import Button from '@mui/joy/Button';
 
 
 export default function Home() {
+    const [text, setText] = useState('');
+    const clear = () => {
+        setText('');
+    }
+
     return(
         <div className={styles.back}>
            <Image
@@ -27,6 +34,16 @@ export default function Home() {
                     <Typography fontSize={30} fontWeight={700}>
                         Wed
                     </Typography>
+                </div>
+                <div className={styles.input}>
+                    <Input
+                        // startDecorator={'ㅋㅋ'}
+                        value={text}
+                        onChange={(e)=>setText(e.target.value)}
+                        placeholder='오늘 나는..'
+                        variant="outlined"
+                        endDecorator={<Button variant='solid' color="primary" onClick={clear}>+</Button>}
+                    ></Input>
                 </div>
             </div>
         </div>
