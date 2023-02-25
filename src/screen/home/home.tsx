@@ -2,19 +2,37 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import styles from 'src/screen/home/styles.module.scss';
 import back from 'public/assets/image/background.png';
-import { Typography } from '@mui/material';
+import { Alert, Snackbar, Typography } from '@mui/material';
 import Input from '@mui/joy/Input';
 import Button from '@mui/joy/Button';
+import { Checkbox } from '@mui/joy';
+import MenuIcon from '@mui/icons-material/Menu';
 
 export default function Home() {
   const [text, setText] = useState<string>('');
+  const [openDialog, setOpenDialog] = useState<boolean>(false);
   const [todoList, setTodoList] = useState<string[]>([]);
 
   const clear = () => {
+    if (todoList.length > 3) {
+      setOpenDialog(true);
+      setText('');
+      return;
+    }
     setTodoList([text, ...todoList]);
     setText('');
   };
-  console.log(todoList);
+
+  const handleClose = (
+    event?: React.SyntheticEvent | Event,
+    reason?: string
+  ) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpenDialog(false);
+  };
 
   return (
     <div className={styles.back}>
@@ -48,11 +66,28 @@ export default function Home() {
                 +
               </Button>
             }
-          ></Input>
+          />
         </div>
         <div className={styles.divider} />
-        <div className={styles.todoListContainer}></div>
+        <div className={styles.todoListContainer}>
+          {todoList?.map((item) => (
+            <div className={styles.todoItem} key={item}>
+              <Checkbox variant='outlined' />
+              <div className={styles.itemContainer}>{item}</div>
+              <MenuIcon />
+            </div>
+          ))}
+          {todoList.length === 0 && <div>새로운 리스트를 추가해보세용</div>}
+        </div>
       </div>
+      <Snackbar
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+        open={openDialog}
+        autoHideDuration={2000}
+        onClose={handleClose}
+      >
+        <Alert severity='error'>N개 이상은 안되지롱~</Alert>
+      </Snackbar>
     </div>
   );
 }
