@@ -1,24 +1,24 @@
-import React, { useState } from "react";
-import Image from "next/image";
-import styles from "src/screen/home/styles.module.scss";
-import back from "public/assets/image/background.png";
-import { Typography } from "@mui/material";
-import Input from "@mui/joy/Input";
-import Button from "@mui/joy/Button";
+import React, { useState } from 'react';
+import Image from 'next/image';
+import styles from 'src/screen/home/styles.module.scss';
+import back from 'public/assets/image/background.png';
+import { Typography } from '@mui/material';
+import Input from '@mui/joy/Input';
+import Button from '@mui/joy/Button';
 
 export default function Home() {
-  const [text, setText] = useState<string>("");
+  const [text, setText] = useState<string>('');
   const [todoList, setTodoList] = useState<string[]>([]);
 
   const clear = () => {
     setTodoList([text, ...todoList]);
-    setText("");
+    setText('');
   };
   console.log(todoList);
 
   return (
     <div className={styles.back}>
-      <Image src={back} fill alt="메인 배경 이미지" style={{ zIndex: -99 }} />
+      <Image src={back} fill alt='메인 배경 이미지' style={{ zIndex: -99 }} />
       <div className={styles.mainTable}>
         <div className={styles.title}>
           <Typography fontWeight={700}>TODO LIST ANYONE CAN DO</Typography>
@@ -36,13 +36,13 @@ export default function Home() {
             // startDecorator={'ㅋㅋ'}
             value={text}
             onChange={(e) => setText(e.target.value)}
-            placeholder="오늘 나는.."
-            variant="outlined"
+            placeholder='오늘 나는..'
+            variant='outlined'
             endDecorator={
               <Button
-                sx={{ border: "1px solid white" }}
-                variant="solid"
-                color="primary"
+                sx={{ border: '1px solid white' }}
+                variant='solid'
+                color='primary'
                 onClick={clear}
               >
                 +
