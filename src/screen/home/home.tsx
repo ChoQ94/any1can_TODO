@@ -14,7 +14,7 @@ export default function Home() {
   const [todoList, setTodoList] = useState<string[]>([]);
 
   const clear = () => {
-    if (todoList.length > 3) {
+    if (todoList.length > 7) {
       setOpenDialog(true);
       setText('');
       return;
@@ -77,7 +77,9 @@ export default function Home() {
               <MenuIcon />
             </div>
           ))}
-          {todoList.length === 0 && <div>새로운 리스트를 추가해보세용</div>}
+          {todoList.length === 0 && (
+            <div className={styles.noList}>No List</div>
+          )}
         </div>
       </div>
       <Snackbar
@@ -86,7 +88,7 @@ export default function Home() {
         autoHideDuration={2000}
         onClose={handleClose}
       >
-        <Alert severity='error'>N개 이상은 안되지롱~</Alert>
+        <Alert severity='error'>8개 이상 등록은 불가해요</Alert>
       </Snackbar>
     </div>
   );
