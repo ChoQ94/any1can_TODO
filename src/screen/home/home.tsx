@@ -5,8 +5,9 @@ import back from 'public/assets/image/background.png';
 import { Alert, Snackbar, Typography } from '@mui/material';
 import Input from '@mui/joy/Input';
 import Button from '@mui/joy/Button';
-import { Checkbox } from '@mui/joy';
+import { Checkbox, IconButton } from '@mui/joy';
 import MenuIcon from '@mui/icons-material/Menu';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const MONTH_WORDS = [
   'Jan',
@@ -46,7 +47,7 @@ export default function Home() {
       setText('');
       return;
     }
-    setTodoList([text, ...todoList]);
+    setTodoList([...todoList, text]);
     setText('');
   };
 
@@ -59,6 +60,11 @@ export default function Home() {
     }
 
     setOpenDialog(false);
+  };
+
+  const deleteItem = (e: any) => {
+    setTodoList(todoList.filter((item) => e !== item));
+    console.log(todoList);
   };
 
   useEffect(() => {
@@ -110,7 +116,14 @@ export default function Home() {
             <div className={styles.todoItem} key={item}>
               <Checkbox variant='outlined' />
               <div className={styles.itemContainer}>{item}</div>
-              <MenuIcon />
+              <IconButton
+                sx={{ marginTop: '-7px' }}
+                onClick={() => {
+                  deleteItem(item);
+                }}
+              >
+                <DeleteIcon />
+              </IconButton>
             </div>
           ))}
           {todoList.length === 0 && (
