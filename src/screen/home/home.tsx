@@ -64,7 +64,6 @@ export default function Home() {
 
   const deleteItem = (e: any) => {
     setTodoList(todoList.filter((item) => e !== item));
-    console.log(todoList);
   };
 
   useEffect(() => {
