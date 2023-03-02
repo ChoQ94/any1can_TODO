@@ -8,6 +8,7 @@ import Button from '@mui/joy/Button';
 import { Checkbox, IconButton } from '@mui/joy';
 import MenuIcon from '@mui/icons-material/Menu';
 import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 
 const MONTH_WORDS = [
   'Jan',
@@ -121,6 +122,9 @@ export default function Home() {
                   deleteItem(item);
                 }}
               >
+                <EditIcon />
+              </IconButton>
+              <IconButton sx={{ marginTop: '-7px' }} onClick={() => {}}>
                 <DeleteIcon />
               </IconButton>
             </div>
