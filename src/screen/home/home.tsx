@@ -1,17 +1,45 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import styles from 'src/screen/home/styles.module.scss';
 import back from 'public/assets/image/background.png';
 import { Alert, Snackbar, Typography } from '@mui/material';
 import Input from '@mui/joy/Input';
 import Button from '@mui/joy/Button';
-import { Checkbox } from '@mui/joy';
+import { Checkbox, IconButton } from '@mui/joy';
 import MenuIcon from '@mui/icons-material/Menu';
+import DeleteIcon from '@mui/icons-material/Delete';
+
+const MONTH_WORDS = [
+  'Jan',
+  'Feb',
+  'Mar',
+  'Apr',
+  'May',
+  'Jun',
+  'July',
+  'Aug',
+  'Sep',
+  'Oct',
+  'Nov',
+  'Dev',
+];
+
+interface DateProps {
+  year: number | string;
+  month: number | string;
+  day: number | string;
+}
 
 export default function Home() {
   const [text, setText] = useState<string>('');
   const [openDialog, setOpenDialog] = useState<boolean>(false);
   const [todoList, setTodoList] = useState<string[]>([]);
+  const [selectedDate, setSelectedDate] = useState<DateProps>({
+    year: '',
+    month: '',
+    day: '',
+  });
+  const today = new Date();
 
   const clear = () => {
     if (todoList.length > 7) {
@@ -19,7 +47,7 @@ export default function Home() {
       setText('');
       return;
     }
-    setTodoList([text, ...todoList]);
+    setTodoList([...todoList, text]);
     setText('');
   };
 
@@ -34,6 +62,19 @@ export default function Home() {
     setOpenDialog(false);
   };
 
+  const deleteItem = (e: any) => {
+    setTodoList(todoList.filter((item) => e !== item));
+  };
+
+  useEffect(() => {
+    const today = new Date();
+    setSelectedDate({
+      year: today.getFullYear(),
+      month: MONTH_WORDS[today.getMonth()],
+      day: today.getDay(),
+    });
+  }, []);
+
   return (
     <div className={styles.back}>
       <Image src={back} fill alt='메인 배경 이미지' style={{ zIndex: -99 }} />
@@ -43,10 +84,10 @@ export default function Home() {
         </div>
         <div className={styles.date}>
           <Typography fontSize={50} fontWeight={700}>
-            Feb 6, 2023
+            {selectedDate.month} {selectedDate.day}, {selectedDate.year}
           </Typography>
           <Typography fontSize={30} fontWeight={700}>
-            Wed
+            {today.toDateString().split(' ')[0]}
           </Typography>
         </div>
         <div className={styles.input}>
@@ -74,11 +115,23 @@ export default function Home() {
             <div className={styles.todoItem} key={item}>
               <Checkbox variant='outlined' />
               <div className={styles.itemContainer}>{item}</div>
-              <MenuIcon />
+              <IconButton
+                sx={{ marginTop: '-7px' }}
+                onClick={() => {
+                  deleteItem(item);
+                }}
+              >
+                <DeleteIcon />
+              </IconButton>
             </div>
           ))}
           {todoList.length === 0 && (
-            <div className={styles.noList}>No List</div>
+            <div className={styles.noList}>
+              <Typography fontWeight={700} fontSize={20}>
+                {' '}
+                No List
+              </Typography>
+            </div>
           )}
         </div>
       </div>
