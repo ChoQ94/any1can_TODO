@@ -72,7 +72,7 @@ export default function Home() {
     setSelectedDate({
       year: today.getFullYear(),
       month: MONTH_WORDS[today.getMonth()],
-      day: today.getDay(),
+      day: today.getDate(),
     });
   }, []);
 

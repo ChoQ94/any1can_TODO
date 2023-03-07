@@ -10,9 +10,9 @@ style : 코드 스타일 혹은 포맷 등에 관한 커밋<br/>
 refactor : 코드 리팩토링에 대한 커밋<br/>
 test : 테스트 코드 수정에 대한 커밋<br/>
 
-# 다른 기기에서 npm install 에러 (2/28)
+# error 모음
 
-참고 : https://velog.io/@whoyoung90/TIL-25-WECODE-React-LUSH-Cloning-npm-install%EC%98%A4%EB%A5%98-%ED%95%B4%EA%B2%B0
-npm 버전차이로 지원하는 lockfileVersion 이 달라 생긴 문제,
-$ npm install --global npm
-// 불가함 => 도커작업
+## 다른 기기에서 npm install 에러 (2/28)
+
+참고 : https://stackoverflow.com/questions/75195099/nextjs-13-1-4-breaks-when-adding-scss-support-cannot-find-module-next-dist-comp
+npm install 시 sass 모듈을 못찾는다는 에러가 발생, 현 사용 노드와(14버전)과 맞지 않는다함. 16인 개인 노트북에서만 돌아감.
