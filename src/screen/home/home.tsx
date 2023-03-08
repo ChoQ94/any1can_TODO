@@ -43,7 +43,7 @@ export default function Home() {
   const today = new Date();
 
   const clear = () => {
-    if (todoList.length > 7) {
+    if (todoList.length >= 7) {
       setOpenDialog(true);
       setText('');
       return;
