@@ -8,6 +8,7 @@ import Button from '@mui/joy/Button';
 import { Checkbox, IconButton } from '@mui/joy';
 import MenuIcon from '@mui/icons-material/Menu';
 import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 
 const MONTH_WORDS = [
   'Jan',
@@ -42,7 +43,7 @@ export default function Home() {
   const today = new Date();
 
   const clear = () => {
-    if (todoList.length > 7) {
+    if (todoList.length >= 7) {
       setOpenDialog(true);
       setText('');
       return;
@@ -71,7 +72,7 @@ export default function Home() {
     setSelectedDate({
       year: today.getFullYear(),
       month: MONTH_WORDS[today.getMonth()],
-      day: today.getDay(),
+      day: today.getDate(),
     });
   }, []);
 
@@ -121,6 +122,9 @@ export default function Home() {
                   deleteItem(item);
                 }}
               >
+                <EditIcon />
+              </IconButton>
+              <IconButton sx={{ marginTop: '-7px' }} onClick={() => {}}>
                 <DeleteIcon />
               </IconButton>
             </div>
