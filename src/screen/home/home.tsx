@@ -93,7 +93,6 @@ export default function Home() {
         </div>
         <div className={styles.input}>
           <Input
-            // startDecorator={'ㅋㅋ'}
             value={text}
             onChange={(e) => setText(e.target.value)}
             placeholder="오늘 나는.."
