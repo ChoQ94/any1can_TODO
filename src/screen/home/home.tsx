@@ -8,7 +8,8 @@ import { Checkbox, IconButton } from "@mui/joy";
 import MenuIcon from "@mui/icons-material/Menu";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
-import Button from "@/components/button";
+import Button from "@/components/Button/button";
+import Typo from "@/components/Typo";
 
 const MONTH_WORDS = [
   "Jan",
@@ -81,7 +82,7 @@ export default function Home() {
       <Image src={back} fill alt="메인 배경 이미지" style={{ zIndex: -99 }} />
       <div className={styles.mainTable}>
         <div className={styles.title}>
-          <Typography fontWeight={700}>TODO LIST ANYONE CAN DO</Typography>
+          <Typo bold>TODO LIST ANYONE CAN DO</Typo>
         </div>
         <div className={styles.date}>
           <Typography fontSize={50} fontWeight={700}>
