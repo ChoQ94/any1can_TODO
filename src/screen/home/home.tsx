@@ -54,6 +54,13 @@ export default function Home() {
     }
   };
 
+  useEffect(() => {
+    fetch("http://localhost:8000/api/tasks")
+      .then((res) => res.json())
+      .then((data) => console.log(data))
+      .catch((err) => console.log(err));
+  }, []);
+
   const handleClose = (
     event?: React.SyntheticEvent | Event,
     reason?: string
