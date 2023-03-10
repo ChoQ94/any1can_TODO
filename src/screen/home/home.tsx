@@ -10,21 +10,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import Button from "@/components/Button/button";
 import Typo from "@/components/Typo";
-
-const MONTH_WORDS = [
-  "Jan",
-  "Feb",
-  "Mar",
-  "Apr",
-  "May",
-  "Jun",
-  "July",
-  "Aug",
-  "Sep",
-  "Oct",
-  "Nov",
-  "Dev",
-];
+import { MONTH_WORDS } from "@/constants/common";
 
 interface DateProps {
   year: number | string;
@@ -35,6 +21,7 @@ interface DateProps {
 export default function Home() {
   const [text, setText] = useState<string>("");
   const [openDialog, setOpenDialog] = useState<boolean>(false);
+  const [dialogText, setDialogText] = useState<string>("");
   const [todoList, setTodoList] = useState<string[]>([]);
   const [selectedDate, setSelectedDate] = useState<DateProps>({
     year: "",
@@ -45,6 +32,14 @@ export default function Home() {
 
   const clear = () => {
     if (todoList.length >= 7) {
+      setDialogText("7개 이상은 불가해요");
+      setOpenDialog(true);
+      setText("");
+      return;
+    }
+
+    if (todoList.includes(text)) {
+      setDialogText("동일한 항목이 이미 있어요");
       setOpenDialog(true);
       setText("");
       return;
@@ -85,12 +80,12 @@ export default function Home() {
           <Typo bold>TODO LIST ANYONE CAN DO</Typo>
         </div>
         <div className={styles.date}>
-          <Typography fontSize={50} fontWeight={700}>
+          <Typo fontSize={50} bold>
             {selectedDate.month} {selectedDate.day}, {selectedDate.year}
-          </Typography>
-          <Typography fontSize={30} fontWeight={700}>
+          </Typo>
+          <Typo fontSize={30} bold>
             {today.toDateString().split(" ")[0]}
-          </Typography>
+          </Typo>
         </div>
         <div className={styles.input}>
           <Input
@@ -116,25 +111,26 @@ export default function Home() {
             <div className={styles.todoItem} key={item}>
               <Checkbox variant="outlined" />
               <div className={styles.itemContainer}>{item}</div>
+
+              <IconButton sx={{ marginTop: "-7px" }} onClick={() => {}}>
+                <EditIcon />
+              </IconButton>
               <IconButton
                 sx={{ marginTop: "-7px" }}
                 onClick={() => {
                   deleteItem(item);
                 }}
               >
-                <EditIcon />
-              </IconButton>
-              <IconButton sx={{ marginTop: "-7px" }} onClick={() => {}}>
                 <DeleteIcon />
               </IconButton>
             </div>
           ))}
           {todoList.length === 0 && (
             <div className={styles.noList}>
-              <Typography fontWeight={700} fontSize={20}>
+              <Typo fontSize={20} bold>
                 {" "}
                 No List
-              </Typography>
+              </Typo>
             </div>
           )}
         </div>
@@ -145,7 +141,7 @@ export default function Home() {
         autoHideDuration={2000}
         onClose={handleClose}
       >
-        <Alert severity="error">8개 이상 등록은 불가해요</Alert>
+        <Alert severity="error">{dialogText}</Alert>
       </Snackbar>
     </div>
   );
