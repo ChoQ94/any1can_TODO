@@ -48,6 +48,12 @@ export default function Home() {
     setText("");
   };
 
+  const clearByEnter = (e) => {
+    if (e.keyCode == 13) {
+      clear();
+    }
+  };
+
   const handleClose = (
     event?: React.SyntheticEvent | Event,
     reason?: string
@@ -93,6 +99,7 @@ export default function Home() {
             onChange={(e) => setText(e.target.value)}
             placeholder="오늘 나는.."
             variant="outlined"
+            onKeyDown={(e) => clearByEnter(e)}
             endDecorator={
               <Button
                 sx={{ border: "1px solid white" }}
@@ -112,9 +119,6 @@ export default function Home() {
               <Checkbox variant="outlined" />
               <div className={styles.itemContainer}>{item}</div>
 
-              <IconButton sx={{ marginTop: "-7px" }} onClick={() => {}}>
-                <EditIcon />
-              </IconButton>
               <IconButton
                 sx={{ marginTop: "-7px" }}
                 onClick={() => {
