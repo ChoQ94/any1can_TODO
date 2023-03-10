@@ -31,6 +31,7 @@ export default function Home() {
   const today = new Date();
 
   const clear = () => {
+    if (text.length === 0) return;
     if (todoList.length >= 7) {
       setDialogText("7개 이상은 불가해요");
       setOpenDialog(true);
