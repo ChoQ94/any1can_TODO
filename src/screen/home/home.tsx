@@ -11,6 +11,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import Button from "@/components/Button/button";
 import Typo from "@/components/Typo";
 import { MONTH_WORDS } from "@/constants/common";
+import { getTodoList } from "@/logics/api";
 
 interface DateProps {
   year: number | string;
@@ -18,7 +19,12 @@ interface DateProps {
   day: number | string;
 }
 
-export default function Home() {
+interface Props {
+  list: any;
+}
+
+export default function Home(props: Props) {
+  const { list } = props;
   const [text, setText] = useState<string>("");
   const [openDialog, setOpenDialog] = useState<boolean>(false);
   const [dialogText, setDialogText] = useState<string>("");
@@ -31,6 +37,7 @@ export default function Home() {
   const today = new Date();
 
   const clear = () => {
+    if (text.length === 0) return;
     if (todoList.length >= 7) {
       setDialogText("7개 이상은 불가해요");
       setOpenDialog(true);
@@ -53,6 +60,10 @@ export default function Home() {
       clear();
     }
   };
+
+  useEffect(() => {
+    console.log(list);
+  }, []);
 
   const handleClose = (
     event?: React.SyntheticEvent | Event,
