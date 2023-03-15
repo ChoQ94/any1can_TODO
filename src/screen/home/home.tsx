@@ -11,6 +11,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import Button from "@/components/Button/button";
 import Typo from "@/components/Typo";
 import { MONTH_WORDS } from "@/constants/common";
+import { getTodoList } from "@/logics/api";
 
 interface DateProps {
   year: number | string;
@@ -18,7 +19,12 @@ interface DateProps {
   day: number | string;
 }
 
-export default function Home() {
+interface Props {
+  list: any;
+}
+
+export default function Home(props: Props) {
+  const { list } = props;
   const [text, setText] = useState<string>("");
   const [openDialog, setOpenDialog] = useState<boolean>(false);
   const [dialogText, setDialogText] = useState<string>("");
@@ -56,10 +62,7 @@ export default function Home() {
   };
 
   useEffect(() => {
-    fetch("http://localhost:8000/api/tasks")
-      .then((res) => res.json())
-      .then((data) => console.log(data))
-      .catch((err) => console.log(err));
+    console.log(list);
   }, []);
 
   const handleClose = (
