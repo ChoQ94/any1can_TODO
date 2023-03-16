@@ -2,16 +2,14 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import styles from "src/screen/home/styles.module.scss";
 import back from "public/assets/image/background.png";
-import { Alert, Snackbar, Typography } from "@mui/material";
 import Input from "@mui/joy/Input";
 import { Checkbox, IconButton } from "@mui/joy";
-import MenuIcon from "@mui/icons-material/Menu";
 import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
 import Button from "@/components/Button/button";
 import Typo from "@/components/Typo";
 import { MONTH_WORDS } from "@/constants/common";
 import { addTodoList, getTodoList } from "@/logics/api";
+import Snackbar from "@/components/Snackbar/snackbar";
 
 interface DateProps {
   year: number | string;
@@ -83,7 +81,7 @@ export default function Home(props: Props) {
   useEffect(() => {
     const today = new Date();
     getTodoList();
-    addTodoList("이런ㅋㅋㅋㅋㅋㅋㅋㅋ");
+    // addTodoList("이런ㅋㅋㅋㅋㅋㅋㅋㅋ");
     setSelectedDate({
       year: today.getFullYear(),
       month: MONTH_WORDS[today.getMonth()],
@@ -153,13 +151,10 @@ export default function Home(props: Props) {
         </div>
       </div>
       <Snackbar
-        anchorOrigin={{ vertical: "top", horizontal: "center" }}
         open={openDialog}
-        autoHideDuration={2000}
         onClose={handleClose}
-      >
-        <Alert severity="error">{dialogText}</Alert>
-      </Snackbar>
+        dialogText={dialogText}
+      />
     </div>
   );
 }
