@@ -11,7 +11,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import Button from "@/components/Button/button";
 import Typo from "@/components/Typo";
 import { MONTH_WORDS } from "@/constants/common";
-import { getTodoList } from "@/logics/api";
+import { addTodoList, getTodoList } from "@/logics/api";
 
 interface DateProps {
   year: number | string;
@@ -82,6 +82,8 @@ export default function Home(props: Props) {
 
   useEffect(() => {
     const today = new Date();
+    getTodoList();
+    addTodoList("이런ㅋㅋㅋㅋㅋㅋㅋㅋ");
     setSelectedDate({
       year: today.getFullYear(),
       month: MONTH_WORDS[today.getMonth()],
