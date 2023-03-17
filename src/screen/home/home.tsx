@@ -34,7 +34,7 @@ export default function Home(props: Props) {
   });
   const today = new Date();
 
-  const clear = () => {
+  const clear = async () => {
     if (text.length === 0) return;
     if (todoList.length >= 7) {
       setDialogText("7개 이상은 불가해요");
@@ -49,6 +49,7 @@ export default function Home(props: Props) {
       setText("");
       return;
     }
+    await addTodoList(text);
     setTodoList([...todoList, text]);
     setText("");
   };
@@ -60,7 +61,7 @@ export default function Home(props: Props) {
   };
 
   useEffect(() => {
-    console.log(list);
+    console.log("ㅂㅈㄷ", list);
   }, []);
 
   const handleClose = (
@@ -81,7 +82,6 @@ export default function Home(props: Props) {
   useEffect(() => {
     const today = new Date();
     getTodoList();
-    // addTodoList("이런ㅋㅋㅋㅋㅋㅋㅋㅋ");
     setSelectedDate({
       year: today.getFullYear(),
       month: MONTH_WORDS[today.getMonth()],
