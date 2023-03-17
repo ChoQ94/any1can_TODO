@@ -2,16 +2,14 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import styles from "src/screen/home/styles.module.scss";
 import back from "public/assets/image/background.png";
-import { Alert, Snackbar, Typography } from "@mui/material";
 import Input from "@mui/joy/Input";
 import { Checkbox, IconButton } from "@mui/joy";
-import MenuIcon from "@mui/icons-material/Menu";
 import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
 import Button from "@/components/Button/button";
 import Typo from "@/components/Typo";
 import { MONTH_WORDS } from "@/constants/common";
-import { getTodoList } from "@/logics/api";
+import { addTodoList, getTodoList } from "@/logics/api";
+import Snackbar from "@/components/Snackbar/snackbar";
 
 interface DateProps {
   year: number | string;
@@ -20,15 +18,15 @@ interface DateProps {
 }
 
 interface Props {
-  list: any;
+  todoList: any;
 }
 
 export default function Home(props: Props) {
-  const { list } = props;
+  const { todoList } = props;
   const [text, setText] = useState<string>("");
   const [openDialog, setOpenDialog] = useState<boolean>(false);
   const [dialogText, setDialogText] = useState<string>("");
-  const [todoList, setTodoList] = useState<string[]>([]);
+  const [list, setList] = useState(todoList);
   const [selectedDate, setSelectedDate] = useState<DateProps>({
     year: "",
     month: "",
@@ -36,7 +34,7 @@ export default function Home(props: Props) {
   });
   const today = new Date();
 
-  const clear = () => {
+  const clear = async () => {
     if (text.length === 0) return;
     if (todoList.length >= 7) {
       setDialogText("7개 이상은 불가해요");
@@ -51,18 +49,20 @@ export default function Home(props: Props) {
       setText("");
       return;
     }
-    setTodoList([...todoList, text]);
+    await addTodoList(text);
+    const res = await getTodoList();
+    setList(res.data);
     setText("");
   };
 
-  const clearByEnter = (e) => {
+  const clearByEnter = (e: any) => {
     if (e.keyCode == 13) {
       clear();
     }
   };
 
   useEffect(() => {
-    console.log(list);
+    console.log("ㅂㅈㄷ", list);
   }, []);
 
   const handleClose = (
@@ -77,11 +77,12 @@ export default function Home(props: Props) {
   };
 
   const deleteItem = (e: any) => {
-    setTodoList(todoList.filter((item) => e !== item));
+    setList(list.filter((item: any) => e !== item));
   };
 
   useEffect(() => {
     const today = new Date();
+    getTodoList();
     setSelectedDate({
       year: today.getFullYear(),
       month: MONTH_WORDS[today.getMonth()],
@@ -125,22 +126,22 @@ export default function Home(props: Props) {
         </div>
         <div className={styles.divider} />
         <div className={styles.todoListContainer}>
-          {todoList?.map((item) => (
-            <div className={styles.todoItem} key={item}>
+          {list?.map((item: any) => (
+            <div className={styles.todoItem} key={item.id}>
               <Checkbox variant="outlined" />
-              <div className={styles.itemContainer}>{item}</div>
+              <div className={styles.itemContainer}>{item.title}</div>
 
               <IconButton
                 sx={{ marginTop: "-7px" }}
                 onClick={() => {
-                  deleteItem(item);
+                  // deleteItem(item);
                 }}
               >
                 <DeleteIcon />
               </IconButton>
             </div>
           ))}
-          {todoList.length === 0 && (
+          {list.length === 0 && (
             <div className={styles.noList}>
               <Typo fontSize={20} bold>
                 {" "}
@@ -151,13 +152,10 @@ export default function Home(props: Props) {
         </div>
       </div>
       <Snackbar
-        anchorOrigin={{ vertical: "top", horizontal: "center" }}
         open={openDialog}
-        autoHideDuration={2000}
         onClose={handleClose}
-      >
-        <Alert severity="error">{dialogText}</Alert>
-      </Snackbar>
+        dialogText={dialogText}
+      />
     </div>
   );
 }
