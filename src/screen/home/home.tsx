@@ -18,15 +18,15 @@ interface DateProps {
 }
 
 interface Props {
-  list: any;
+  todoList: any;
 }
 
 export default function Home(props: Props) {
-  const { list } = props;
+  const { todoList } = props;
   const [text, setText] = useState<string>("");
   const [openDialog, setOpenDialog] = useState<boolean>(false);
   const [dialogText, setDialogText] = useState<string>("");
-  const [todoList, setTodoList] = useState<string[]>([]);
+  const [list, setList] = useState(todoList);
   const [selectedDate, setSelectedDate] = useState<DateProps>({
     year: "",
     month: "",
@@ -50,11 +50,12 @@ export default function Home(props: Props) {
       return;
     }
     await addTodoList(text);
-    setTodoList([...todoList, text]);
+    const res = await getTodoList();
+    setList(res.data);
     setText("");
   };
 
-  const clearByEnter = (e) => {
+  const clearByEnter = (e: any) => {
     if (e.keyCode == 13) {
       clear();
     }
@@ -76,7 +77,7 @@ export default function Home(props: Props) {
   };
 
   const deleteItem = (e: any) => {
-    setTodoList(todoList.filter((item) => e !== item));
+    setList(list.filter((item: any) => e !== item));
   };
 
   useEffect(() => {
@@ -125,22 +126,22 @@ export default function Home(props: Props) {
         </div>
         <div className={styles.divider} />
         <div className={styles.todoListContainer}>
-          {todoList?.map((item) => (
-            <div className={styles.todoItem} key={item}>
+          {list?.map((item: any) => (
+            <div className={styles.todoItem} key={item.id}>
               <Checkbox variant="outlined" />
-              <div className={styles.itemContainer}>{item}</div>
+              <div className={styles.itemContainer}>{item.title}</div>
 
               <IconButton
                 sx={{ marginTop: "-7px" }}
                 onClick={() => {
-                  deleteItem(item);
+                  // deleteItem(item);
                 }}
               >
                 <DeleteIcon />
               </IconButton>
             </div>
           ))}
-          {todoList.length === 0 && (
+          {list.length === 0 && (
             <div className={styles.noList}>
               <Typo fontSize={20} bold>
                 {" "}

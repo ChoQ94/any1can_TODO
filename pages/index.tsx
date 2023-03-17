@@ -7,11 +7,11 @@ export default function HomePage(props: any) {
 }
 
 export const getServerSideProps = async () => {
-  const list = await getTodoList();
+  const { data: todoList } = await getTodoList();
 
   return {
     props: {
-      list,
+      todoList,
     },
   };
 };
