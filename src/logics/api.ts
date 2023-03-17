@@ -16,3 +16,11 @@ export const addTodoList = async (todoItem: string) => {
 
   return response;
 };
+
+export const deleteTodoList = async (todoID: string | number) => {
+  const response = await fetch(`http://localhost:8000/api/tasks/${todoID}`, {
+    method: "DELETE",
+  });
+
+  return response;
+};

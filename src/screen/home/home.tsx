@@ -8,7 +8,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import Button from "@/components/Button/button";
 import Typo from "@/components/Typo";
 import { MONTH_WORDS } from "@/constants/common";
-import { addTodoList, getTodoList } from "@/logics/api";
+import { addTodoList, deleteTodoList, getTodoList } from "@/logics/api";
 import Snackbar from "@/components/Snackbar/snackbar";
 
 interface DateProps {
@@ -76,8 +76,11 @@ export default function Home(props: Props) {
     setOpenDialog(false);
   };
 
-  const deleteItem = (e: any) => {
-    setList(list.filter((item: any) => e !== item));
+  const deleteItem = async (item: string | number) => {
+    await deleteTodoList(item);
+
+    const { data } = await getTodoList();
+    setList(data);
   };
 
   useEffect(() => {
@@ -134,14 +137,14 @@ export default function Home(props: Props) {
               <IconButton
                 sx={{ marginTop: "-7px" }}
                 onClick={() => {
-                  // deleteItem(item);
+                  deleteItem(item.id);
                 }}
               >
                 <DeleteIcon />
               </IconButton>
             </div>
           ))}
-          {list.length === 0 && (
+          {list?.length === 0 && (
             <div className={styles.noList}>
               <Typo fontSize={20} bold>
                 {" "}
