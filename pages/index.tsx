@@ -7,10 +7,12 @@ export default function HomePage(props: any) {
 }
 
 export const getServerSideProps = async () => {
-  let todoList = [];
+  let todoList = null;
   try {
     const { data } = await getTodoList();
-    todoList = data;
+    if (data) {
+      todoList = data;
+    }
   } catch (err) {
     console.log(err);
   }
