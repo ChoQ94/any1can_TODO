@@ -36,14 +36,14 @@ export default function Home(props: Props) {
 
   const clear = async () => {
     if (text.length === 0) return;
-    if (todoList.length >= 7) {
+    if (todoList?.length >= 7) {
       setDialogText("7개 이상은 불가해요");
       setOpenDialog(true);
       setText("");
       return;
     }
 
-    if (todoList.includes(text)) {
+    if (todoList?.includes(text)) {
       setDialogText("동일한 항목이 이미 있어요");
       setOpenDialog(true);
       setText("");

@@ -1,26 +1,38 @@
 export const getTodoList = async () => {
-  const response = await fetch("http://localhost:8000/api/tasks").then((res) =>
-    res.json()
-  );
-  return response;
+  try {
+    const response = await fetch("http://localhost:8000/api/tasks").then(
+      (res) => res.json()
+    );
+    return response;
+  } catch (err) {
+    return {};
+  }
 };
 
 export const addTodoList = async (todoItem: string) => {
-  const response = await fetch("http://localhost:8000/api/tasks", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ title: todoItem }),
-  });
+  try {
+    const response = await fetch("http://localhost:8000/api/tasks", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ title: todoItem }),
+    });
 
-  return response;
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const deleteTodoList = async (todoID: string | number) => {
-  const response = await fetch(`http://localhost:8000/api/tasks/${todoID}`, {
-    method: "DELETE",
-  });
+  try {
+    const response = await fetch(`http://localhost:8000/api/tasks/${todoID}`, {
+      method: "DELETE",
+    });
 
-  return response;
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
 };
