@@ -12,8 +12,8 @@ test : 테스트 코드 수정에 대한 커밋<br/>
 
 # 구조
 
-프런트 : Nextjs
-백엔드 서버 : Nodejs
-DB : MongoDB
+프런트 : Nextjs<br/>
+백엔드 서버 : Nodejs<br/>
+DB : MongoDB<br/>
 
 백엔드 git : https://github.com/ChoQ94/any1can_TODO_BE
