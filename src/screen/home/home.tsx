@@ -61,10 +61,6 @@ export default function Home(props: Props) {
     }
   };
 
-  useEffect(() => {
-    console.log("ㅂㅈㄷ", list);
-  }, []);
-
   const handleClose = (
     event?: React.SyntheticEvent | Event,
     reason?: string
