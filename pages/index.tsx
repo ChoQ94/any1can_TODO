@@ -9,7 +9,8 @@ export default function HomePage(props: any) {
 export const getServerSideProps = async () => {
   let todoList = null;
   try {
-    const { data } = await getTodoList();
+    const data = await getTodoList();
+
     if (data) {
       todoList = data;
     }
