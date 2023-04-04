@@ -20,6 +20,12 @@
     border-bottom: 3px solid #373a41;
   }
 
+  .dayPicker {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 30px 0px 40px;
+  }
+
   .date {
     height: 200px;
     display: flex;

@@ -10,6 +10,8 @@ import Typo from "@/components/Typo";
 import { MONTH_WORDS } from "@/constants/common";
 import { addTodoList, deleteTodoList, getTodoList } from "@/logics/api";
 import Snackbar from "@/components/Snackbar/snackbar";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
 interface DateProps {
   year: number | string;
@@ -96,13 +98,21 @@ export default function Home(props: Props) {
         <div className={styles.title}>
           <Typo bold>TODO LIST ANYONE CAN DO</Typo>
         </div>
-        <div className={styles.date}>
-          <Typo fontSize={50} bold>
-            {selectedDate.month} {selectedDate.day}, {selectedDate.year}
-          </Typo>
-          <Typo fontSize={30} bold>
-            {today.toDateString().split(" ")[0]}
-          </Typo>
+        <div className={styles.dayPicker}>
+          <IconButton>
+            <ArrowBackIosIcon />
+          </IconButton>
+          <div className={styles.date}>
+            <Typo fontSize={50} bold>
+              {selectedDate.month} {selectedDate.day}, {selectedDate.year}
+            </Typo>
+            <Typo fontSize={30} bold>
+              {today.toDateString().split(" ")[0]}
+            </Typo>
+          </div>
+          <IconButton>
+            <ArrowForwardIosIcon />
+          </IconButton>
         </div>
         <div className={styles.input}>
           <Input
