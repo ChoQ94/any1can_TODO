@@ -52,7 +52,7 @@ export default function Home(props: Props) {
     }
     await addTodoList(text);
     const res = await getTodoList();
-    setList(res.data);
+    setList(res);
     setText("");
   };
 
@@ -76,7 +76,7 @@ export default function Home(props: Props) {
   const deleteItem = async (item: string | number) => {
     await deleteTodoList(item);
 
-    const { data } = await getTodoList();
+    const data = await getTodoList();
     setList(data);
   };
 
@@ -135,14 +135,14 @@ export default function Home(props: Props) {
         <div className={styles.divider} />
         <div className={styles.todoListContainer}>
           {list?.map((item: any) => (
-            <div className={styles.todoItem} key={item.id}>
+            <div className={styles.todoItem} key={item._id}>
               <Checkbox variant="outlined" />
               <div className={styles.itemContainer}>{item.title}</div>
 
               <IconButton
                 sx={{ marginTop: "-7px" }}
                 onClick={() => {
-                  deleteItem(item.id);
+                  deleteItem(item._id);
                 }}
               >
                 <DeleteIcon />
