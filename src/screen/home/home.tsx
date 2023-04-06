@@ -7,7 +7,7 @@ import { Checkbox, IconButton } from "@mui/joy";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Button from "@/components/Button/button";
 import Typo from "@/components/Typo";
-import { MONTH_WORDS } from "@/constants/common";
+import { KEYBOARD_ENTER, MAIN_TITLE, MONTH_WORDS } from "@/constants/common";
 import { addTodoList, deleteTodoList, getTodoList } from "@/logics/api";
 import Snackbar from "@/components/Snackbar/snackbar";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
@@ -58,7 +58,7 @@ export default function Home(props: Props) {
   };
 
   const clearByEnter = (e: any) => {
-    if (e.keyCode == 13) {
+    if (e.keyCode === KEYBOARD_ENTER) {
       clear();
     }
   };
@@ -96,7 +96,7 @@ export default function Home(props: Props) {
       <Image src={back} fill alt="메인 배경 이미지" style={{ zIndex: -99 }} />
       <div className={styles.mainTable}>
         <div className={styles.title}>
-          <Typo bold>TODO LIST ANYONE CAN DO</Typo>
+          <Typo bold>{MAIN_TITLE}</Typo>
         </div>
         <div className={styles.dayPicker}>
           <IconButton>
