@@ -17,3 +17,47 @@ test : 테스트 코드 수정에 대한 커밋<br/>
 DB : MongoDB<br/>
 
 백엔드 git : https://github.com/ChoQ94/any1can_TODO_BE
+
+```
+any1can_todo
+├─ pages
+│  ├─ _app.tsx
+│  ├─ _document.tsx
+│  ├─ api
+│  │  └─ hello.ts
+│  └─ index.tsx
+├─ public
+│  ├─ assets
+│  │  └─ image
+│  │     └─ background.png
+│  ├─ favicon.ico
+│  ├─ next.svg
+│  ├─ thirteen.svg
+│  └─ vercel.svg
+├─ src
+│  ├─ components
+│  │  ├─ core
+│  │  │  ├─ Button
+│  │  │  │  └─ button.tsx
+│  │  │  ├─ Snackbar
+│  │  │  │  └─ snackbar.tsx
+│  │  │  └─ Typo
+│  │  │     └─ index.tsx
+│  │  └─ module
+│  │     └─ DateContainer
+│  │        └─ index.tsx
+│  ├─ constants
+│  │  └─ common.ts
+│  ├─ logics
+│  │  └─ api.ts
+│  ├─ screen
+│  │  └─ home
+│  │     ├─ home.tsx
+│  │     └─ styles.module.scss
+│  ├─ styles
+│  │  ├─ Home.module.css
+│  │  └─ globals.css
+│  └─ types
+│     └─ common.ts
+
+```
