@@ -5,19 +5,12 @@ import back from "public/assets/image/background.png";
 import Input from "@mui/joy/Input";
 import { Checkbox, IconButton } from "@mui/joy";
 import DeleteIcon from "@mui/icons-material/Delete";
-import Button from "@/components/Button/button";
-import Typo from "@/components/Typo";
-import { KEYBOARD_ENTER, MAIN_TITLE, MONTH_WORDS } from "@/constants/common";
+import Button from "@/components/core/Button/button";
+import Typo from "@/components/core/Typo";
+import { KEYBOARD_ENTER, MAIN_TITLE } from "@/constants/common";
 import { addTodoList, deleteTodoList, getTodoList } from "@/logics/api";
-import Snackbar from "@/components/Snackbar/snackbar";
-import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-
-interface DateProps {
-  year: number | string;
-  month: number | string;
-  day: number | string;
-}
+import Snackbar from "@/components/core/Snackbar/snackbar";
+import DateContainer from "@/components/module/DateContainer";
 
 interface Props {
   todoList: any;
@@ -29,12 +22,6 @@ export default function Home(props: Props) {
   const [openDialog, setOpenDialog] = useState<boolean>(false);
   const [dialogText, setDialogText] = useState<string>("");
   const [list, setList] = useState(todoList);
-  const [selectedDate, setSelectedDate] = useState<DateProps>({
-    year: "",
-    month: "",
-    day: "",
-  });
-  const today = new Date();
 
   const clear = async () => {
     if (text.length === 0) return;
@@ -82,13 +69,7 @@ export default function Home(props: Props) {
   };
 
   useEffect(() => {
-    const today = new Date();
     getTodoList();
-    setSelectedDate({
-      year: today.getFullYear(),
-      month: MONTH_WORDS[today.getMonth()],
-      day: today.getDate(),
-    });
   }, []);
 
   return (
@@ -98,22 +79,7 @@ export default function Home(props: Props) {
         <div className={styles.title}>
           <Typo bold>{MAIN_TITLE}</Typo>
         </div>
-        <div className={styles.dayPicker}>
-          <IconButton>
-            <ArrowBackIosIcon />
-          </IconButton>
-          <div className={styles.date}>
-            <Typo fontSize={50} bold>
-              {selectedDate.month} {selectedDate.day}, {selectedDate.year}
-            </Typo>
-            <Typo fontSize={30} bold>
-              {today.toDateString().split(" ")[0]}
-            </Typo>
-          </div>
-          <IconButton>
-            <ArrowForwardIosIcon />
-          </IconButton>
-        </div>
+        <DateContainer />
         <div className={styles.input}>
           <Input
             value={text}
