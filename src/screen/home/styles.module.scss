@@ -19,25 +19,6 @@
     align-items: center;
     border-bottom: 3px solid #373a41;
   }
-  .dayPicker {
-    display: flex;
-    justify-content: space-between;
-    margin: 0 30px 0px 40px;
-  }
-
-  .dayPicker {
-    display: flex;
-    justify-content: space-between;
-    margin: 0 30px 0px 40px;
-  }
-
-  .date {
-    height: 200px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
 
   .input {
     width: 400px;
@@ -49,32 +30,5 @@
     width: 500px;
     margin: auto;
     border: 1.4px solid #373a41;
-  }
-
-  .todoListContainer {
-    width: 500px;
-    margin: auto;
-
-    .todoItem {
-      width: 500px;
-      height: 30px;
-      display: flex;
-      margin: 20px auto;
-      .itemContainer {
-        // display: inline-block;
-        flex-grow: 1;
-        margin-left: 10px;
-        font-size: 20px;
-      }
-    }
-
-    .noList {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 500px;
-      height: 300px;
-      margin: auto;
-    }
   }
 }

@@ -11,6 +11,7 @@ import { addTodoList, deleteTodoList, getTodoList } from "@/logics/api";
 import Snackbar from "@/components/core/Snackbar/snackbar";
 import DateContainer from "@/components/module/DateContainer";
 import Textfield from "@/components/core/Textfield";
+import ListContainer from "@/components/module/ListContainer";
 
 interface Props {
   todoList: any;
@@ -100,31 +101,7 @@ export default function Home(props: Props) {
           />
         </div>
         <div className={styles.divider} />
-        <div className={styles.todoListContainer}>
-          {list?.map((item: any) => (
-            <div className={styles.todoItem} key={item._id}>
-              <Checkbox variant="outlined" />
-              <div className={styles.itemContainer}>{item.title}</div>
-
-              <IconButton
-                sx={{ marginTop: "-7px" }}
-                onClick={() => {
-                  deleteItem(item._id);
-                }}
-              >
-                <DeleteIcon />
-              </IconButton>
-            </div>
-          ))}
-          {list?.length === 0 && (
-            <div className={styles.noList}>
-              <Typo fontSize={20} bold>
-                {" "}
-                No List
-              </Typo>
-            </div>
-          )}
-        </div>
+        <ListContainer data={list} deleteItem={deleteItem} />
       </div>
       <Snackbar
         open={openDialog}
