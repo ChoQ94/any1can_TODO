@@ -11,6 +11,7 @@ import { KEYBOARD_ENTER, MAIN_TITLE } from "@/constants/common";
 import { addTodoList, deleteTodoList, getTodoList } from "@/logics/api";
 import Snackbar from "@/components/core/Snackbar/snackbar";
 import DateContainer from "@/components/module/DateContainer";
+import Textfield from "@/components/core/Textfield";
 
 interface Props {
   todoList: any;
@@ -81,12 +82,29 @@ export default function Home(props: Props) {
         </div>
         <DateContainer />
         <div className={styles.input}>
-          <Input
+          {/* <Input
             value={text}
             onChange={(e) => setText(e.target.value)}
             placeholder="오늘 나는.."
             variant="outlined"
             onKeyDown={(e) => clearByEnter(e)}
+            endDecorator={
+              <Button
+                sx={{ border: "1px solid white" }}
+                variant="solid"
+                color="primary"
+                onClick={clear}
+              >
+                +
+              </Button>
+            }
+          /> */}
+          <Textfield
+            value={text}
+            onChange={(e: any) => setText(e.target.value)}
+            placeholder="오늘 나는.."
+            variant="outlined"
+            onKeyDown={(e: any) => clearByEnter(e)}
             endDecorator={
               <Button
                 sx={{ border: "1px solid white" }}
