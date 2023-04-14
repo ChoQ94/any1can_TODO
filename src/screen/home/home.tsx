@@ -74,7 +74,7 @@ export default function Home(props: Props) {
   }, []);
 
   return (
-    <div className={styles.back}>
+    <div className={styles.background}>
       <Image src={back} fill alt="메인 배경 이미지" style={{ zIndex: -99 }} />
       <div className={styles.mainTable}>
         <div className={styles.title}>
