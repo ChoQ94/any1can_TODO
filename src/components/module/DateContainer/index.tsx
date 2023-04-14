@@ -7,30 +7,13 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import Typo from "@/components/core/Typo";
 import { MONTH_WORDS } from "@/constants/common";
 
-interface DateProps {
-  year: number | string;
-  month: number | string;
-  day: number | string;
+interface Props {
+  selectedDate: any;
+  today: any;
 }
 
-export default function DateContainer() {
-  const [selectedDate, setSelectedDate] = useState<DateProps>({
-    year: "",
-    month: "",
-    day: "",
-  });
-
-  const today = new Date();
-
-  useEffect(() => {
-    const today = new Date();
-    // getTodoList();
-    setSelectedDate({
-      year: today.getFullYear(),
-      month: MONTH_WORDS[today.getMonth()],
-      day: today.getDate(),
-    });
-  }, []);
+export default function DateContainer(props: Props) {
+  const { selectedDate, today } = props;
 
   return (
     <div className={styles.dayPicker}>

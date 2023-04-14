@@ -2,16 +2,17 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import styles from "src/screen/home/styles.module.scss";
 import back from "public/assets/image/background.png";
-import { Checkbox, IconButton } from "@mui/joy";
-import DeleteIcon from "@mui/icons-material/Delete";
+import { IconButton } from "@mui/joy";
 import Button from "@/components/core/Button/button";
 import Typo from "@/components/core/Typo";
-import { KEYBOARD_ENTER, MAIN_TITLE } from "@/constants/common";
+import { KEYBOARD_ENTER, MAIN_TITLE, MONTH_WORDS } from "@/constants/common";
 import { addTodoList, deleteTodoList, getTodoList } from "@/logics/api";
 import Snackbar from "@/components/core/Snackbar/snackbar";
-import DateContainer from "@/components/module/DateContainer";
 import Textfield from "@/components/core/Textfield";
 import ListContainer from "@/components/module/ListContainer";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import { DateProps } from "@/types/common";
 
 interface Props {
   todoList: any;
@@ -23,6 +24,11 @@ export default function Home(props: Props) {
   const [openDialog, setOpenDialog] = useState<boolean>(false);
   const [dialogText, setDialogText] = useState<string>("");
   const [list, setList] = useState(todoList);
+  const [selectedDate, setSelectedDate] = useState<DateProps>({
+    year: "",
+    month: "",
+    day: "",
+  });
 
   const clear = async () => {
     if (text.length === 0) return;
@@ -62,6 +68,17 @@ export default function Home(props: Props) {
     setOpenDialog(false);
   };
 
+  const today = new Date();
+
+  useEffect(() => {
+    const today = new Date();
+    setSelectedDate({
+      year: today.getFullYear(),
+      month: MONTH_WORDS[today.getMonth()],
+      day: today.getDate(),
+    });
+  }, []);
+
   const deleteItem = async (item: string | number) => {
     await deleteTodoList(item);
 
@@ -80,7 +97,22 @@ export default function Home(props: Props) {
         <div className={styles.title}>
           <Typo bold>{MAIN_TITLE}</Typo>
         </div>
-        <DateContainer />
+        <div className={styles.dayPicker}>
+          <IconButton>
+            <ArrowBackIosIcon />
+          </IconButton>
+          <div className={styles.date}>
+            <Typo fontSize={50} bold>
+              {selectedDate.month} {selectedDate.day}, {selectedDate.year}
+            </Typo>
+            <Typo fontSize={30} bold>
+              {today.toDateString().split(" ")[0]}
+            </Typo>
+          </div>
+          <IconButton>
+            <ArrowForwardIosIcon />
+          </IconButton>
+        </div>
         <div className={styles.input}>
           <Textfield
             value={text}
