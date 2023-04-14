@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import styles from "src/screen/home/styles.module.scss";
 import back from "public/assets/image/background.png";
-import Input from "@mui/joy/Input";
 import { Checkbox, IconButton } from "@mui/joy";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Button from "@/components/core/Button/button";
@@ -82,23 +81,6 @@ export default function Home(props: Props) {
         </div>
         <DateContainer />
         <div className={styles.input}>
-          {/* <Input
-            value={text}
-            onChange={(e) => setText(e.target.value)}
-            placeholder="오늘 나는.."
-            variant="outlined"
-            onKeyDown={(e) => clearByEnter(e)}
-            endDecorator={
-              <Button
-                sx={{ border: "1px solid white" }}
-                variant="solid"
-                color="primary"
-                onClick={clear}
-              >
-                +
-              </Button>
-            }
-          /> */}
           <Textfield
             value={text}
             onChange={(e: any) => setText(e.target.value)}
