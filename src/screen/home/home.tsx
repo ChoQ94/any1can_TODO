@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import styles from "src/screen/home/styles.module.scss";
 import back from "public/assets/image/background.png";
-import Input from "@mui/joy/Input";
 import { Checkbox, IconButton } from "@mui/joy";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Button from "@/components/core/Button/button";
@@ -11,6 +10,7 @@ import { KEYBOARD_ENTER, MAIN_TITLE } from "@/constants/common";
 import { addTodoList, deleteTodoList, getTodoList } from "@/logics/api";
 import Snackbar from "@/components/core/Snackbar/snackbar";
 import DateContainer from "@/components/module/DateContainer";
+import Textfield from "@/components/core/Textfield";
 
 interface Props {
   todoList: any;
@@ -81,12 +81,12 @@ export default function Home(props: Props) {
         </div>
         <DateContainer />
         <div className={styles.input}>
-          <Input
+          <Textfield
             value={text}
-            onChange={(e) => setText(e.target.value)}
+            onChange={(e: any) => setText(e.target.value)}
             placeholder="오늘 나는.."
             variant="outlined"
-            onKeyDown={(e) => clearByEnter(e)}
+            onKeyDown={(e: any) => clearByEnter(e)}
             endDecorator={
               <Button
                 sx={{ border: "1px solid white" }}
