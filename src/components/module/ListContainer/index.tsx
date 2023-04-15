@@ -13,9 +13,11 @@ interface Props {
 export default function ListContainer(props: Props) {
   const { data, deleteItem } = props;
 
+  if (!data) return <></>;
+
   return (
     <div className={styles.todoListContainer}>
-      {data?.map((item: any) => (
+      {/* {data?.map((item: any) => (
         <div className={styles.todoItem} key={item._id}>
           <Checkbox variant="outlined" />
           <div className={styles.itemContainer}>{item.title}</div>
@@ -29,7 +31,8 @@ export default function ListContainer(props: Props) {
             <DeleteIcon />
           </IconButton>
         </div>
-      ))}
+      ))} */}
+
       {data?.length === 0 && (
         <div className={styles.noList}>
           <Typo fontSize={20} bold>
