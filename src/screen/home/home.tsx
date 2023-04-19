@@ -86,6 +86,8 @@ export default function Home(props: Props) {
     setList(data);
   };
 
+  const changeDate = () => {};
+
   useEffect(() => {
     getTodoList();
   }, []);
