@@ -1,8 +1,7 @@
-export const getTodoList = async () => {
+export const getTodoList = async (date?: Date) => {
+  const getUrl = `http://localhost:8000/api/tasks/${date}`;
   try {
-    const response = await fetch("http://localhost:8000/api/tasks").then(
-      (res) => res.json()
-    );
+    const response = await fetch(getUrl).then((res) => res.json());
     return response;
   } catch (err) {
     return {};
