@@ -18,6 +18,8 @@ interface Props {
   todoList: any;
 }
 
+const CLICK_FORWARD_BUTTON = "forward";
+
 export default function Home(props: Props) {
   const { todoList } = props;
   const [text, setText] = useState<string>("");
@@ -30,7 +32,7 @@ export default function Home(props: Props) {
     day: "",
     date: "",
   });
-  const [dateChangeStack, setDateChangeStack] = useState(1);
+  const [dateChangeStack, setDateChangeStack] = useState(0);
 
   const clear = async () => {
     if (text.length === 0) return;
@@ -70,6 +72,36 @@ export default function Home(props: Props) {
     setOpenDialog(false);
   };
 
+  const deleteItem = async (item: string | number) => {
+    await deleteTodoList(item);
+
+    const data = await getTodoList();
+    setList(data);
+  };
+
+  const changeDate = async (move: string) => {
+    if (move === CLICK_FORWARD_BUTTON) {
+      setDateChangeStack(dateChangeStack + 1);
+    } else {
+      setDateChangeStack(dateChangeStack - 1);
+    }
+  };
+
+  useEffect(() => {
+    const today = new Date();
+    const newDate = new Date(today.setDate(today.getDate() + dateChangeStack));
+    setSelectedDate({
+      year: newDate.getFullYear(),
+      month: MONTH_WORDS[newDate.getMonth()],
+      day: newDate.getDate(),
+      date: newDate,
+    });
+  }, [dateChangeStack]);
+
+  useEffect(() => {
+    getTodoList();
+  }, []);
+
   useEffect(() => {
     const today = new Date();
     setSelectedDate({
@@ -78,33 +110,6 @@ export default function Home(props: Props) {
       day: today.getDate(),
       date: today,
     });
-  }, []);
-
-  const deleteItem = async (item: string | number) => {
-    await deleteTodoList(item);
-
-    const data = await getTodoList();
-    setList(data);
-  };
-
-  const changeDate = (way: string) => {
-    const today = new Date();
-    if (way === "forward") {
-      setDateChangeStack(dateChangeStack + 1);
-    } else {
-      setDateChangeStack(dateChangeStack - 1);
-    }
-    const newDate = new Date(today.setDate(today.getDate() + dateChangeStack));
-    setSelectedDate({
-      year: newDate.getFullYear(),
-      month: MONTH_WORDS[newDate.getMonth()],
-      day: newDate.getDate(),
-      date: newDate,
-    });
-  };
-
-  useEffect(() => {
-    getTodoList();
   }, []);
 
   return (
