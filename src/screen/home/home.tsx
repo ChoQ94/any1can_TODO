@@ -87,14 +87,20 @@ export default function Home(props: Props) {
     setList(data);
   };
 
-  const changeDate = () => {
+  const changeDate = (way: string) => {
     const today = new Date();
-    if (1) {
+    if (way === "forward") {
       setDateChangeStack(dateChangeStack + 1);
     } else {
       setDateChangeStack(dateChangeStack - 1);
     }
-    let newDate = new Date(today.setDate(today.getDate() + dateChangeStack));
+    const newDate = new Date(today.setDate(today.getDate() + dateChangeStack));
+    setSelectedDate({
+      year: newDate.getFullYear(),
+      month: MONTH_WORDS[newDate.getMonth()],
+      day: newDate.getDate(),
+      date: newDate,
+    });
   };
 
   useEffect(() => {
@@ -109,7 +115,7 @@ export default function Home(props: Props) {
           <Typo bold>{MAIN_TITLE}</Typo>
         </div>
         <div className={styles.dayPicker}>
-          <IconButton>
+          <IconButton onClick={() => changeDate("backward")}>
             <ArrowBackIosIcon />
           </IconButton>
           <div className={styles.date}>
@@ -120,7 +126,7 @@ export default function Home(props: Props) {
               {selectedDate.date?.toString().split(" ")[0]}
             </Typo>
           </div>
-          <IconButton>
+          <IconButton onClick={() => changeDate("forward")}>
             <ArrowForwardIosIcon />
           </IconButton>
         </div>
