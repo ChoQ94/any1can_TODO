@@ -4,4 +4,5 @@ export interface DateProps {
   year: number | string;
   month: number | string;
   day: number | string;
+  date: Date | string;
 }

@@ -18,6 +18,8 @@ interface Props {
   todoList: any;
 }
 
+const CLICK_FORWARD_BUTTON = "forward";
+
 export default function Home(props: Props) {
   const { todoList } = props;
   const [text, setText] = useState<string>("");
@@ -28,7 +30,9 @@ export default function Home(props: Props) {
     year: "",
     month: "",
     day: "",
+    date: "",
   });
+  const [dateChangeStack, setDateChangeStack] = useState(0);
 
   const clear = async () => {
     if (text.length === 0) return;
@@ -68,17 +72,6 @@ export default function Home(props: Props) {
     setOpenDialog(false);
   };
 
-  const today = new Date();
-
-  useEffect(() => {
-    const today = new Date();
-    setSelectedDate({
-      year: today.getFullYear(),
-      month: MONTH_WORDS[today.getMonth()],
-      day: today.getDate(),
-    });
-  }, []);
-
   const deleteItem = async (item: string | number) => {
     await deleteTodoList(item);
 
@@ -86,10 +79,37 @@ export default function Home(props: Props) {
     setList(data);
   };
 
-  const changeDate = () => {};
+  const changeDate = async (move: string) => {
+    if (move === CLICK_FORWARD_BUTTON) {
+      setDateChangeStack(dateChangeStack + 1);
+    } else {
+      setDateChangeStack(dateChangeStack - 1);
+    }
+  };
+
+  useEffect(() => {
+    const today = new Date();
+    const newDate = new Date(today.setDate(today.getDate() + dateChangeStack));
+    setSelectedDate({
+      year: newDate.getFullYear(),
+      month: MONTH_WORDS[newDate.getMonth()],
+      day: newDate.getDate(),
+      date: newDate,
+    });
+  }, [dateChangeStack]);
 
   useEffect(() => {
     getTodoList();
+  }, []);
+
+  useEffect(() => {
+    const today = new Date();
+    setSelectedDate({
+      year: today.getFullYear(),
+      month: MONTH_WORDS[today.getMonth()],
+      day: today.getDate(),
+      date: today,
+    });
   }, []);
 
   return (
@@ -100,7 +120,7 @@ export default function Home(props: Props) {
           <Typo bold>{MAIN_TITLE}</Typo>
         </div>
         <div className={styles.dayPicker}>
-          <IconButton>
+          <IconButton onClick={() => changeDate("backward")}>
             <ArrowBackIosIcon />
           </IconButton>
           <div className={styles.date}>
@@ -108,10 +128,10 @@ export default function Home(props: Props) {
               {selectedDate.month} {selectedDate.day}, {selectedDate.year}
             </Typo>
             <Typo fontSize={30} bold>
-              {today.toDateString().split(" ")[0]}
+              {selectedDate.date?.toString().split(" ")[0]}
             </Typo>
           </div>
-          <IconButton>
+          <IconButton onClick={() => changeDate("forward")}>
             <ArrowForwardIosIcon />
           </IconButton>
         </div>
