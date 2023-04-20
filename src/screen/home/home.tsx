@@ -28,7 +28,9 @@ export default function Home(props: Props) {
     year: "",
     month: "",
     day: "",
+    date: "",
   });
+  const [dateChangeStack, setDateChangeStack] = useState(1);
 
   const clear = async () => {
     if (text.length === 0) return;
@@ -68,14 +70,13 @@ export default function Home(props: Props) {
     setOpenDialog(false);
   };
 
-  const today = new Date();
-
   useEffect(() => {
     const today = new Date();
     setSelectedDate({
       year: today.getFullYear(),
       month: MONTH_WORDS[today.getMonth()],
       day: today.getDate(),
+      date: today,
     });
   }, []);
 
@@ -86,7 +87,15 @@ export default function Home(props: Props) {
     setList(data);
   };
 
-  const changeDate = () => {};
+  const changeDate = () => {
+    const today = new Date();
+    if (1) {
+      setDateChangeStack(dateChangeStack + 1);
+    } else {
+      setDateChangeStack(dateChangeStack - 1);
+    }
+    let newDate = new Date(today.setDate(today.getDate() + dateChangeStack));
+  };
 
   useEffect(() => {
     getTodoList();
@@ -108,7 +117,7 @@ export default function Home(props: Props) {
               {selectedDate.month} {selectedDate.day}, {selectedDate.year}
             </Typo>
             <Typo fontSize={30} bold>
-              {today.toDateString().split(" ")[0]}
+              {selectedDate.date?.toString().split(" ")[0]}
             </Typo>
           </div>
           <IconButton>
