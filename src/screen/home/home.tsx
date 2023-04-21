@@ -99,9 +99,9 @@ export default function Home(props: Props) {
     });
   }, [dateChangeStack]);
 
-  useEffect(() => {
-    getTodoList();
-  }, []);
+  // useEffect(() => {
+  //   getTodoList();
+  // }, []);
 
   useEffect(() => {
     const today = new Date();
