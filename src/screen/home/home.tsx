@@ -90,7 +90,7 @@ export default function Home(props: Props) {
   useEffect(() => {
     const today = new Date();
     const newDate = new Date(today.setDate(today.getDate() + dateChangeStack));
-    // getTodoList(newDate);
+    getTodoList(newDate);
     setSelectedDate({
       year: newDate.getFullYear(),
       month: MONTH_WORDS[newDate.getMonth()],
@@ -98,10 +98,6 @@ export default function Home(props: Props) {
       date: newDate,
     });
   }, [dateChangeStack]);
-
-  useEffect(() => {
-    getTodoList();
-  }, []);
 
   useEffect(() => {
     const today = new Date();
