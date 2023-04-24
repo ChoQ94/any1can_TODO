@@ -1,11 +1,10 @@
 import { IconButton } from "@mui/joy";
 import styles from "src/components/module/DateContainer/styles.module.scss";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import Typo from "@/components/core/Typo";
-import { MONTH_WORDS } from "@/constants/common";
 
 interface Props {
   selectedDate: any;
