@@ -1,9 +1,8 @@
 import { Checkbox, IconButton } from "@mui/joy";
-import React, { useState } from "react";
+import React from "react";
 import styles from "@/components/module/ListContainer/styles.module.scss";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Typo from "@/components/core/Typo";
-import { deleteTodoList, getTodoList } from "@/logics/api";
 
 interface Props {
   data: any;
