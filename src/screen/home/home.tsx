@@ -85,8 +85,17 @@ export default function Home(props: Props) {
 
   const deleteItem = async (item: string | number) => {
     await deleteTodoList(item);
-
-    const data = await getTodoList();
+    const today = new Date();
+    const newDate = new Date(today.setDate(today.getDate() + dateChangeStack));
+    const dateFormat =
+      newDate.getFullYear() +
+      "-" +
+      (today.getMonth() + 1 < 9
+        ? "0" + (today.getMonth() + 1)
+        : today.getMonth() + 1) +
+      "-" +
+      (today.getDate() < 9 ? "0" + today.getDate() : today.getDate());
+    const data = await getTodoList(dateFormat);
     setList(data);
   };
 
