@@ -13,9 +13,12 @@ export const getServerSideProps = async () => {
 
     if (data) {
       todoList = data;
+    } else {
+      todoList = [];
     }
   } catch (err) {
     console.log(err);
+    todoList = [];
   }
 
   return {
