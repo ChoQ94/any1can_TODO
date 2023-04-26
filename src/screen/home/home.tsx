@@ -36,31 +36,30 @@ export default function Home(props: Props) {
 
   const clear = async () => {
     if (text.length === 0) return;
-    // if (todoList && todoList?.length >= 7) {
-    //   setDialogText("7개 이상은 불가해요");
-    //   setOpenDialog(true);
-    //   setText("");
-    //   return;
-    // }
+    if (todoList && todoList?.length >= 7) {
+      setDialogText("7개 이상은 불가해요");
+      setOpenDialog(true);
+      setText("");
+      return;
+    }
 
-    // if (todoList && todoList?.includes(text)) {
-    //   setDialogText("동일한 항목이 이미 있어요");
-    //   setOpenDialog(true);
-    //   setText("");
-    //   return;
-    // }
+    if (todoList && todoList?.includes(text)) {
+      setDialogText("동일한 항목이 이미 있어요");
+      setOpenDialog(true);
+      setText("");
+      return;
+    }
     const today = new Date();
     const newDate = new Date(today.setDate(today.getDate() + dateChangeStack));
     const dateFormat =
       newDate.getFullYear() +
       "-" +
-      (today.getMonth() + 1 < 9
-        ? "0" + (today.getMonth() + 1)
-        : today.getMonth() + 1) +
+      (newDate.getMonth() + 1 < 9
+        ? "0" + (newDate.getMonth() + 1)
+        : newDate.getMonth() + 1) +
       "-" +
-      (today.getDate() < 9 ? "0" + today.getDate() : today.getDate());
+      (newDate.getDate() < 9 ? "0" + newDate.getDate() : newDate.getDate());
     await addTodoList(text);
-    console.log(dateFormat);
     const res = await getTodoList(dateFormat);
     setList(res);
     setText("");
