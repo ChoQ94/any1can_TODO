@@ -54,13 +54,12 @@ export default function Home(props: Props) {
     const dateFormat =
       newDate.getFullYear() +
       "-" +
-      (today.getMonth() + 1 < 9
-        ? "0" + (today.getMonth() + 1)
-        : today.getMonth() + 1) +
+      (newDate.getMonth() + 1 < 9
+        ? "0" + (newDate.getMonth() + 1)
+        : newDate.getMonth() + 1) +
       "-" +
-      (today.getDate() < 9 ? "0" + today.getDate() : today.getDate());
+      (newDate.getDate() < 9 ? "0" + newDate.getDate() : newDate.getDate());
     await addTodoList(text);
-    console.log(dateFormat);
     const res = await getTodoList(dateFormat);
     setList(res);
     setText("");
