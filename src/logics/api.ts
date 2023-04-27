@@ -8,14 +8,14 @@ export const getTodoList = async (date?: Date | string) => {
   }
 };
 
-export const addTodoList = async (todoItem: string) => {
+export const addTodoList = async (todoItem: string, date: string) => {
   try {
-    const response = await fetch("http://localhost:8000/api/tasks", {
+    const response = await fetch(`http://localhost:8000/api/tasks`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ title: todoItem }),
+      body: JSON.stringify({ title: todoItem, date: date }),
     });
 
     return response;

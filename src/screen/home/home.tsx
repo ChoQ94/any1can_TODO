@@ -59,7 +59,7 @@ export default function Home(props: Props) {
         : newDate.getMonth() + 1) +
       "-" +
       (newDate.getDate() < 9 ? "0" + newDate.getDate() : newDate.getDate());
-    await addTodoList(text);
+    await addTodoList(text, dateFormat);
     const res = await getTodoList(dateFormat);
     setList(res);
     setText("");
