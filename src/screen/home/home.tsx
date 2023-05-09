@@ -98,6 +98,8 @@ export default function Home(props: Props) {
     setList(data);
   };
 
+  const checkItem = async () => {};
+
   const changeDate = async (move: string) => {
     if (move === CLICK_FORWARD_BUTTON) {
       setDateChangeStack(dateChangeStack + 1);
