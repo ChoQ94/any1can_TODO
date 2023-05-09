@@ -36,7 +36,10 @@ export const deleteTodoList = async (todoID: string | number) => {
   }
 };
 
-export const checkTodoList = async (todoID: string | number) => {
+export const checkTodoList = async (
+  todoID: string | number,
+  checked: boolean
+) => {
   try {
   } catch (error) {}
 };
