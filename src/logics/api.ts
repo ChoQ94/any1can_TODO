@@ -38,8 +38,19 @@ export const deleteTodoList = async (todoID: string | number) => {
 
 export const checkTodoList = async (
   todoID: string | number,
-  checked: boolean
+  completed: boolean
 ) => {
   try {
-  } catch (error) {}
+    const response = await fetch(`http://localhost:8000/api/tasks/${todoID}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ completed: completed }),
+    });
+
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
 };
