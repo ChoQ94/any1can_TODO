@@ -3,14 +3,18 @@ import React from "react";
 import styles from "@/components/module/ListContainer/styles.module.scss";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Typo from "@/components/core/Typo";
+import { checkTodoList } from "@/logics/api";
 
 interface Props {
   data: any;
   deleteItem: any;
+  checkItem: any;
 }
 
 export default function ListContainer(props: Props) {
-  const { data, deleteItem } = props;
+  const { data, deleteItem, checkItem } = props;
+
+  console.log(data);
 
   if (!data) return <></>;
 
@@ -18,7 +22,13 @@ export default function ListContainer(props: Props) {
     <div className={styles.todoListContainer}>
       {data?.map((item: any) => (
         <div className={styles.todoItem} key={item._id}>
-          <Checkbox variant="outlined" />
+          <Checkbox
+            variant="outlined"
+            checked={item.completed}
+            onClick={() => {
+              checkItem(item._id, !item.completed);
+            }}
+          />
           <div className={styles.itemContainer}>{item.title}</div>
 
           <IconButton

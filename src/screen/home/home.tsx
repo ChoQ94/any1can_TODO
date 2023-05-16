@@ -6,7 +6,12 @@ import { IconButton } from "@mui/joy";
 import Button from "@/components/core/Button/button";
 import Typo from "@/components/core/Typo";
 import { KEYBOARD_ENTER, MAIN_TITLE, MONTH_WORDS } from "@/constants/common";
-import { addTodoList, deleteTodoList, getTodoList } from "@/logics/api";
+import {
+  addTodoList,
+  checkTodoList,
+  deleteTodoList,
+  getTodoList,
+} from "@/logics/api";
 import Snackbar from "@/components/core/Snackbar/snackbar";
 import Textfield from "@/components/core/Textfield";
 import ListContainer from "@/components/module/ListContainer";
@@ -98,7 +103,22 @@ export default function Home(props: Props) {
     setList(data);
   };
 
-  const checkItem = async () => {};
+  const checkItem = async (id: any, completed: boolean) => {
+    await checkTodoList(id, completed);
+
+    const today = new Date();
+    const newDate = new Date(today.setDate(today.getDate() + dateChangeStack));
+    const dateFormat =
+      newDate.getFullYear() +
+      "-" +
+      (today.getMonth() + 1 < 9
+        ? "0" + (today.getMonth() + 1)
+        : today.getMonth() + 1) +
+      "-" +
+      (today.getDate() < 9 ? "0" + today.getDate() : today.getDate());
+    const data = await getTodoList(dateFormat);
+    setList(data);
+  };
 
   const changeDate = async (move: string) => {
     if (move === CLICK_FORWARD_BUTTON) {
@@ -188,7 +208,11 @@ export default function Home(props: Props) {
           />
         </div>
         <div className={styles.divider} />
-        <ListContainer data={list} deleteItem={deleteItem} />
+        <ListContainer
+          data={list}
+          deleteItem={deleteItem}
+          checkItem={checkItem}
+        />
       </div>
       <Snackbar
         open={openDialog}
