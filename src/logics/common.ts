@@ -1,4 +1,6 @@
-const dateConverter = (date: Date) => {
+const dateConverter = (changeStack: number) => {
+  const today = new Date();
+  const date = new Date(today.setDate(today.getDate() + changeStack));
   const dateFormat =
     date.getFullYear() +
     "-" +
