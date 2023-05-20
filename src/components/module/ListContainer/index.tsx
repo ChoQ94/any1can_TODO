@@ -14,8 +14,6 @@ interface Props {
 export default function ListContainer(props: Props) {
   const { data, deleteItem, checkItem } = props;
 
-  console.log(data);
-
   if (!data) return <></>;
 
   return (

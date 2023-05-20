@@ -18,7 +18,7 @@ import ListContainer from "@/components/module/ListContainer";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { DateProps } from "@/types/common";
-
+import { dateConverter } from "@/logics/common";
 interface Props {
   todoList: any;
 }
@@ -54,16 +54,8 @@ export default function Home(props: Props) {
       setText("");
       return;
     }
-    const today = new Date();
-    const newDate = new Date(today.setDate(today.getDate() + dateChangeStack));
-    const dateFormat =
-      newDate.getFullYear() +
-      "-" +
-      (newDate.getMonth() + 1 < 9
-        ? "0" + (newDate.getMonth() + 1)
-        : newDate.getMonth() + 1) +
-      "-" +
-      (newDate.getDate() < 9 ? "0" + newDate.getDate() : newDate.getDate());
+
+    const dateFormat = dateConverter(dateChangeStack);
     await addTodoList(text, dateFormat);
     const res = await getTodoList(dateFormat);
     setList(res);
@@ -83,43 +75,19 @@ export default function Home(props: Props) {
     if (reason === "clickaway") {
       return;
     }
-
     setOpenDialog(false);
   };
 
   const deleteItem = async (item: string | number) => {
     await deleteTodoList(item);
-    const today = new Date();
-    console.log(today);
-    const newDate = new Date(today.setDate(today.getDate() + dateChangeStack));
-    console.log("========");
-    console.log(today);
-    console.log(newDate);
-    const dateFormat =
-      newDate.getFullYear() +
-      "-" +
-      (newDate.getMonth() + 1 < 9
-        ? "0" + (newDate.getMonth() + 1)
-        : newDate.getMonth() + 1) +
-      "-" +
-      (newDate.getDate() < 9 ? "0" + newDate.getDate() : newDate.getDate());
+    const dateFormat = dateConverter(dateChangeStack);
     const data = await getTodoList(dateFormat);
     setList(data);
   };
 
   const checkItem = async (id: any, completed: boolean) => {
     await checkTodoList(id, completed);
-
-    const today = new Date();
-    const newDate = new Date(today.setDate(today.getDate() + dateChangeStack));
-    const dateFormat =
-      newDate.getFullYear() +
-      "-" +
-      (today.getMonth() + 1 < 9
-        ? "0" + (today.getMonth() + 1)
-        : today.getMonth() + 1) +
-      "-" +
-      (today.getDate() < 9 ? "0" + today.getDate() : today.getDate());
+    const dateFormat = dateConverter(dateChangeStack);
     const data = await getTodoList(dateFormat);
     setList(data);
   };
@@ -148,8 +116,7 @@ export default function Home(props: Props) {
         : today.getMonth() + 1) +
       "-" +
       (today.getDate() < 9 ? "0" + today.getDate() : today.getDate());
-    console.log(dateFormat);
-    // getTodoList(dateFormat);
+
     getNew(dateFormat);
     setSelectedDate({
       year: newDate.getFullYear(),
@@ -159,19 +126,13 @@ export default function Home(props: Props) {
     });
   }, [dateChangeStack]);
 
-  useEffect(() => {
-    const today = new Date();
-    setSelectedDate({
-      year: today.getFullYear(),
-      month: MONTH_WORDS[today.getMonth()],
-      day: today.getDate(),
-      date: today,
-    });
-  }, []);
-
   return (
     <div className={styles.background}>
-      <Image src={back} fill alt="메인 배경 이미지" style={{ zIndex: -99 }} />
+      <Image
+        src={back}
+        alt="메인 배경 이미지"
+        className={styles.backgroundImage}
+      />
       <div className={styles.mainTable}>
         <div className={styles.title}>
           <Typo bold>{MAIN_TITLE}</Typo>
