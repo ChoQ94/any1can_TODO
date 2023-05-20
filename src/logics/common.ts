@@ -1,4 +1,4 @@
-const dateConverter = (changeStack: number) => {
+export const dateConverter = (changeStack: number) => {
   const today = new Date();
   const date = new Date(today.setDate(today.getDate() + changeStack));
   const dateFormat =
@@ -9,4 +9,6 @@ const dateConverter = (changeStack: number) => {
       : date.getMonth() + 1) +
     "-" +
     (date.getDate() < 9 ? "0" + date.getDate() : date.getDate());
+
+  return dateFormat;
 };
