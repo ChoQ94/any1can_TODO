@@ -24,6 +24,7 @@ interface Props {
 }
 
 const CLICK_FORWARD_BUTTON = "forward";
+const CLICK_BACKWARD_BUTTON = "backward";
 
 export default function Home(props: Props) {
   const { todoList } = props;
@@ -138,7 +139,7 @@ export default function Home(props: Props) {
           <Typo bold>{MAIN_TITLE}</Typo>
         </div>
         <div className={styles.dayPicker}>
-          <IconButton onClick={() => changeDate("backward")}>
+          <IconButton onClick={() => changeDate(CLICK_BACKWARD_BUTTON)}>
             <ArrowBackIosIcon />
           </IconButton>
           <div className={styles.date}>
@@ -149,7 +150,7 @@ export default function Home(props: Props) {
               {selectedDate.date?.toString().split(" ")[0]}
             </Typo>
           </div>
-          <IconButton onClick={() => changeDate("forward")}>
+          <IconButton onClick={() => changeDate(CLICK_FORWARD_BUTTON)}>
             <ArrowForwardIosIcon />
           </IconButton>
         </div>
