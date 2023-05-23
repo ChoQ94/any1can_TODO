@@ -5,6 +5,7 @@
   align-items: center;
   justify-content: center;
 }
+
 .backgroundImage {
   z-index: -99;
   position: absolute;
@@ -20,6 +21,7 @@
   background-color: #3d4148;
   border-radius: 12px;
   position: absolute;
+
   .title {
     height: 50px;
     display: flex;
