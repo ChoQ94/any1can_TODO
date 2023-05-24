@@ -131,7 +131,7 @@ export default function Home(props: Props) {
     <div className={styles.background}>
       <Image
         src={back}
-        alt="메인 배경 이미지"
+        alt="backgroundImage"
         className={styles.backgroundImage}
       />
       <div className={styles.mainTable}>
