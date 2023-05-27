@@ -16,3 +16,6 @@ export const MONTH_WORDS = [
 export const KEYBOARD_ENTER = 13;
 
 export const MAIN_TITLE = "TODO LIST ANYONE CAN DO";
+
+export const CLICK_FORWARD_BUTTON = "forward";
+export const CLICK_BACKWARD_BUTTON = "backward";
