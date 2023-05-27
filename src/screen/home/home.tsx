@@ -5,7 +5,13 @@ import back from "public/assets/image/background.png";
 import { IconButton } from "@mui/joy";
 import Button from "@/components/core/Button/button";
 import Typo from "@/components/core/Typo";
-import { KEYBOARD_ENTER, MAIN_TITLE, MONTH_WORDS } from "@/constants/common";
+import {
+  CLICK_BACKWARD_BUTTON,
+  CLICK_FORWARD_BUTTON,
+  KEYBOARD_ENTER,
+  MAIN_TITLE,
+  MONTH_WORDS,
+} from "@/constants/common";
 import {
   addTodoList,
   checkTodoList,
@@ -22,9 +28,6 @@ import { dateConverter } from "@/logics/common";
 interface Props {
   todoList: any;
 }
-
-const CLICK_FORWARD_BUTTON = "forward";
-const CLICK_BACKWARD_BUTTON = "backward";
 
 export default function Home(props: Props) {
   const { todoList } = props;
@@ -158,7 +161,7 @@ export default function Home(props: Props) {
           <Textfield
             value={text}
             onChange={(e: any) => setText(e.target.value)}
-            placeholder="오늘 나는.."
+            placeholder="오늘 나는..!"
             variant="outlined"
             onKeyDown={(e: any) => clearByEnter(e)}
             endDecorator={
