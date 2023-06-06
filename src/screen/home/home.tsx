@@ -21,8 +21,6 @@ import {
 import Snackbar from "@/components/core/Snackbar/snackbar";
 import Textfield from "@/components/core/Textfield";
 import ListContainer from "@/components/module/ListContainer";
-import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { DateProps } from "@/types/common";
 import { dateConverter } from "@/logics/common";
 interface Props {
@@ -142,11 +140,8 @@ export default function Home(props: Props) {
           <Typo bold>{MAIN_TITLE}</Typo>
         </div>
         <div className={styles.dayPicker}>
-          <IconButton
-            style={{ height: "20px" }}
-            onClick={() => changeDate(CLICK_BACKWARD_BUTTON)}
-          >
-            <ArrowBackIosIcon />
+          <IconButton onClick={() => changeDate(CLICK_BACKWARD_BUTTON)}>
+            {"<"}
           </IconButton>
           <div className={styles.date}>
             <Typo fontSize={50} bold>
@@ -156,11 +151,8 @@ export default function Home(props: Props) {
               {selectedDate.date?.toString().split(" ")[0]}
             </Typo>
           </div>
-          <IconButton
-            style={{ height: "20px" }}
-            onClick={() => changeDate(CLICK_FORWARD_BUTTON)}
-          >
-            <ArrowForwardIosIcon />
+          <IconButton onClick={() => changeDate(CLICK_FORWARD_BUTTON)}>
+            {">"}
           </IconButton>
         </div>
         <div className={styles.input}>
