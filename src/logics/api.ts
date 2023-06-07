@@ -1,3 +1,6 @@
+import axios from "axios";
+import { QueryOptions, useQuery } from "react-query";
+
 export const getTodoList = async (date?: Date | string) => {
   const getUrl = `http://localhost:8000/api/tasks/${date}`;
   try {
@@ -6,6 +9,17 @@ export const getTodoList = async (date?: Date | string) => {
   } catch (err) {
     return {};
   }
+};
+
+export const useGetTodoList = async (
+  date?: Date | string,
+  options?: QueryOptions
+) => {
+  const queryKey = `http://localhost:8000/api`;
+  const quertFunc = await axios
+    .get(`${queryKey}/tasks/${date}`)
+    .then((res) => res.data);
+  return useQuery([queryKey, date], quertFunc, { ...options });
 };
 
 export const addTodoList = async (todoItem: string, date: string) => {
