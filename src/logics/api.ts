@@ -11,15 +11,8 @@ export const getTodoList = async (date?: Date | string) => {
   }
 };
 
-export const useGetTodoList = async (
-  date?: Date | string,
-  options?: QueryOptions
-) => {
-  const queryKey = `http://localhost:8000/api`;
-  const quertFunc = await axios
-    .get(`${queryKey}/tasks/${date}`)
-    .then((res) => res.data);
-  return useQuery([queryKey, date], quertFunc, { ...options });
+export const useGetTodoList = (date?: Date | string) => {
+  return useQuery(["todoList", date], () => getTodoList(date));
 };
 
 export const addTodoList = async (todoItem: string, date: string) => {

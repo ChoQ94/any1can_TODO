@@ -17,12 +17,14 @@ import {
   checkTodoList,
   deleteTodoList,
   getTodoList,
+  useGetTodoList,
 } from "@/logics/api";
 import Snackbar from "@/components/core/Snackbar/snackbar";
 import Textfield from "@/components/core/Textfield";
 import ListContainer from "@/components/module/ListContainer";
 import { DateProps } from "@/types/common";
 import { dateConverter } from "@/logics/common";
+import { QueryOptions } from "react-query";
 interface Props {
   todoList: any;
 }
@@ -40,7 +42,17 @@ export default function Home(props: Props) {
     date: "",
   });
   const [dateChangeStack, setDateChangeStack] = useState(0);
-
+  const TIME = 1000 * 5;
+  const dateFormat = dateConverter(dateChangeStack);
+  // const { date, loading } = useGetTodoList(dateFormat, {
+  //   staleTime: TIME,
+  //   cacheTime: TIME,
+  // });
+  // console.log(data);
+  const { data, isLoading, isError } = useGetTodoList(dateFormat);
+  console.log(data);
+  console.log(isLoading);
+  console.log(isError);
   const clear = async () => {
     if (text.length === 0) return;
     if (todoList && todoList?.length >= 7) {
