@@ -50,6 +50,7 @@ export default function Home(props: Props) {
   // });
   // console.log(data);
   const { data, isLoading, isError } = useGetTodoList(dateFormat);
+
   console.log(data);
   console.log(isLoading);
   console.log(isError);
